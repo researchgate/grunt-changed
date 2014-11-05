@@ -1,7 +1,7 @@
 {
   "name": "grunt-changed",
   "description": "Run Grunt tasks with only those source files where the content changed to the last run.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/researchgate/grunt-changed",
   "author": {
     "name": "Bastian Hofmann",
@@ -37,8 +37,7 @@
     "wrench": "1.5.8",
     "tmp": "0.0.24",
     "grunt-contrib-clean": "0.6.0",
-    "mock-fs": "2.x",
-    "mkdirp": "0.5.0"
+    "mock-fs": "2.x"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
@@ -51,6 +50,7 @@
   ],
   "dependencies": {
     "async": "0.9.0",
-    "rimraf": "2.2.8"
+    "rimraf": "2.2.8",
+    "mkdirp": "0.5.0"
   }
 }
