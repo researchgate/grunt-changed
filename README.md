@@ -2,7 +2,7 @@
 
 Configure [Grunt](http://gruntjs.com/) tasks to run with changed file contents only.
 
-**Synopsis:**  The [`changed`](#changed) task will configure another task to run with `src` files that have *a)* different content than on the previous run (based on md5 hash).  See below for examples and more detail. This library is heavily inspired by [`grunt-newer`](https://npmjs.org/package/grunt-newer)
+**Synopsis:**  The [`changed`](#changed) task will configure another task to run with `src` files that have *a)* different content than on the previous run (based on md5 hash).  See below for examples and more detail. This library is heavily inspired by and based on [`grunt-newer`](https://npmjs.org/package/grunt-newer)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
