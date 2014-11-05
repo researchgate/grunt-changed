@@ -67,43 +67,49 @@ function createTask(grunt) {
     }
 
     var files = grunt.task.normalizeMultiTaskFiles(config, targetName);
-    util.filterFilesByHash(files, options.cache, taskName, targetName, function(e, changedFiles) {
-      if (e) {
-        return done(e);
-      } else if (changedFiles.length === 0) {
-        grunt.log.writeln('No changed files to process.');
-        return done();
-      }
+    util.filterFilesByHash(
+        files,
+        options.cache,
+        taskName,
+        targetName,
+        function(e, changedFiles) {
+          if (e) {
+            return done(e);
+          } else if (changedFiles.length === 0) {
+            grunt.log.writeln('No changed files to process.');
+            return done();
+          }
 
-      /**
-       * If we started out with only src files in the files config,
-       * transform the changedFiles array into an array of source files.
-       */
-      if (!srcFiles) {
-        changedFiles = changedFiles.map(function(obj) {
-          return obj.src;
-        });
-      }
+          /**
+           * If we started out with only src files in the files config,
+           * transform the changedFiles array into an array of source files.
+           */
+          if (!srcFiles) {
+            changedFiles = changedFiles.map(function(obj) {
+              return obj.src;
+            });
+          }
 
-      // configure target with only changed files
-      config.files = changedFiles;
-      delete config.src;
-      delete config.dest;
-      grunt.config.set([taskName, targetName], config);
+          // configure target with only changed files
+          config.files = changedFiles;
+          delete config.src;
+          delete config.dest;
+          grunt.config.set([taskName, targetName], config);
 
-      // because we modified the task config, cache the original
-      var id = cacheConfig(originalConfig);
+          // because we modified the task config, cache the original
+          var id = cacheConfig(originalConfig);
 
-      // run the task, and attend to postrun tasks
-      var qualified = taskName + ':' + targetName;
-      var tasks = [
-        qualified + (args ? ':' + args : ''),
-        'changed-postrun:' + qualified + ':' + id
-      ];
-      grunt.task.run(tasks);
+          // run the task, and attend to postrun tasks
+          var qualified = taskName + ':' + targetName;
+          var tasks = [
+            qualified + (args ? ':' + args : ''),
+            'changed-postrun:' + qualified + ':' + id
+          ];
+          grunt.task.run(tasks);
 
-      done();
-    });
+          done();
+        }
+    );
 
   };
 }
