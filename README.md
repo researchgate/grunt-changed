@@ -124,8 +124,6 @@ Example use of the `cache` option:
 
 Please [submit an issue](https://github.com/researchgate/grunt-changed/issues) if you encounter any trouble.  Contributions or suggestions for improvements welcome!
 
-[![Current Status](https://secure.travis-ci.org/researchgate/grunt-changed.png?branch=master)](https://travis-ci.org/researchgate/grunt-changed)
-
 ## Known limitations
 
 The `changed` task relies on Grunt's convention for specifying [`src`/`dest` mappings](http://gruntjs.com/configuring-tasks#files).  So it should be expected to work with two types of tasks:
