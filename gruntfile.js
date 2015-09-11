@@ -16,12 +16,12 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    cafemocha: {
-      options: {
-        reporter: 'spec'
-      },
-      all: {
-        src: testSrc
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+        },
+        src: [testSrc]
       }
     },
 
@@ -67,9 +67,9 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-cafe-mocha');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
-  grunt.registerTask('test', ['changed:jshint', 'cafemocha']);
+  grunt.registerTask('test', ['changed:jshint', 'mochaTest']);
 
   grunt.registerTask('default', 'test');
 
