@@ -1,6 +1,7 @@
 # grunt-changed
 
 [![Build Status](https://travis-ci.org/researchgate/grunt-changed.svg?branch=master)](https://travis-ci.org/researchgate/grunt-changed)
+[![npm](https://img.shields.io/npm/v/grunt-changed.svg)](https://www.npmjs.com/package/grunt-changed)
 
 Configure [Grunt](http://gruntjs.com/) tasks to run with changed file contents only.
 
