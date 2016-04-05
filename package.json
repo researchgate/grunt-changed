@@ -30,7 +30,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "grunt": "^1.0.0",
-    "grunt-cli": "^1.0.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
