@@ -35,7 +35,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-mocha-test": "^0.12.7",
     "mocha": "^2.4.5",
-    "mock-fs": "^3.7.0",
+    "mock-fs": "^3.9.0",
     "tmp": "^0.0.28",
     "wrench": "^1.5.8"
   },
