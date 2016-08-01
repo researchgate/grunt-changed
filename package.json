@@ -50,7 +50,7 @@
   ],
   "dependencies": {
     "async": "^1.5.2",
-    "rimraf": "^2.5.1",
+    "rimraf": "^2.5.3",
     "mkdirp": "^0.5.1"
   }
 }
