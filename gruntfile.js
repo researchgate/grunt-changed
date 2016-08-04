@@ -1,10 +1,3 @@
-var assert = require('assert');
-var path = require('path');
-var fs = require('fs');
-
-/**
- * @param {Object} grunt Grunt.
- */
 module.exports = function(grunt) {
 
   var gruntfileSrc = 'gruntfile.js';
