@@ -1,9 +1,5 @@
-var fs = require('fs');
 var path = require('path');
-
-var async = require('async');
 var rimraf = require('rimraf');
-
 var util = require('../lib/util');
 
 var counter = 0;
