@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": "gruntfile.js",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "files": [
     "lib",
