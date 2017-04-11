@@ -1,14 +1,12 @@
 var path = require('path');
 var cp = require('child_process');
-var fs = require('fs');
+var fs = require('fs-extra');
 
 var chai = require('chai');
 var tmp = require('tmp');
-var wrench = require('wrench');
 
 var fixtures = path.join(__dirname, 'integration', 'fixtures');
 var tmpDir = 'tmp';
-
 
 /**
  * Spawn a Grunt process.
@@ -27,7 +25,6 @@ function spawnGrunt(dir, done) {
   }
 }
 
-
 /**
  * Set up before running tests.
  * @param {string} name Fixture name.
@@ -44,12 +41,11 @@ function cloneFixture(name, done) {
       return done(error);
     }
     var scratch = path.join(dir, name);
-    wrench.copyDirRecursive(fixture, scratch, function(error) {
+    fs.copy(fixture, scratch, function(error) {
       done(error, scratch);
     });
   });
 }
-
 
 /**
  * Clone a fixture and run the default Grunt task in it.
@@ -94,8 +90,8 @@ exports.afterFixture = function(scratch, done) {
   var error;
   if (scratch) {
     try {
-      wrench.rmdirSyncRecursive(scratch, false);
-      wrench.rmdirSyncRecursive(tmpDir, false);
+      fs.removeSync(scratch);
+      fs.removeSync(tmpDir);
     } catch (err) {
       error = err;
     }
@@ -103,10 +99,8 @@ exports.afterFixture = function(scratch, done) {
   done(error);
 };
 
-
 /** @type {boolean} */
 chai.config.includeStack = true;
-
 
 /**
  * Chai's assert function configured to include stacks on failure.

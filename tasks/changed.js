@@ -110,7 +110,6 @@ function createTask(grunt) {
   };
 }
 
-
 /** @param {Object} grunt Grunt. */
 module.exports = function(grunt) {
 
