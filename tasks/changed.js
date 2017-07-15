@@ -20,6 +20,10 @@ function pluckConfig(id) {
   return config;
 }
 
+function nullOverride(details, include) {
+  include(false);
+}
+
 function createTask(grunt) {
   return function(taskName, targetName) {
     var tasks = [];
@@ -38,6 +42,7 @@ function createTask(grunt) {
     }
     var args = Array.prototype.slice.call(arguments, 2).join(':');
     var options = this.options({
+      override: nullOverride,
       cache: path.join(__dirname, '..', '.cache')
     });
 
@@ -62,12 +67,34 @@ function createTask(grunt) {
       srcFiles = false;
     }
 
+    function override(filePath, include) {
+      var details = {
+        task: taskName,
+        target: targetName,
+        path: filePath,
+        getExistingHash: function (fp, cb) {
+          util.getExistingHash(fp,
+            options.cache,
+            taskName,
+            targetName,
+            cb);
+        },
+        generateFileHash: function (fp, cb) {
+          util.generateFileHash(filePath,
+            cb);
+        }
+      };
+      options.override(details, include);
+    }
+
+
     var files = grunt.task.normalizeMultiTaskFiles(config, targetName);
     util.filterFilesByHash(
         files,
         options.cache,
         taskName,
         targetName,
+        override,
         function(e, changedFiles) {
           if (e) {
             return done(e);
