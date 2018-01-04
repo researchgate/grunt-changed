@@ -5,9 +5,13 @@ var util = require('../lib/util');
 var counter = 0;
 var configCache = {};
 
-function cacheConfig(config) {
+function cacheConfig(config, changedFiles, override) {
   ++counter;
-  configCache[counter] = config;
+  configCache[counter] = {
+      config: config,
+      changedFiles: changedFiles,
+      override: override
+  };
   return counter;
 }
 
@@ -120,13 +124,13 @@ function createTask(grunt) {
           grunt.config.set([taskName, targetName], config);
 
           // because we modified the task config, cache the original
-          var id = cacheConfig(originalConfig);
+          var id = cacheConfig(originalConfig, changedFiles, override);
 
-          // run the task, and attend to postrun tasks
+            // run the task, and attend to postrun tasks
           var qualified = taskName + ':' + targetName;
           var tasks = [
             qualified + (args ? ':' + args : ''),
-            'changed-postrun:' + qualified + ':' + id
+            'changed-postrun:' + qualified + ':' + id + ':' + options.cache
           ];
           grunt.task.run(tasks);
 
@@ -146,9 +150,33 @@ module.exports = function(grunt) {
 
   var internal = 'Internal task.';
   grunt.registerTask(
-      'changed-postrun', internal, function(taskName, targetName, id) {
-        // reconfigure task with original config
-        grunt.config.set([taskName, targetName], pluckConfig(id));
+      'changed-postrun',
+      internal,
+      function(taskName, targetName, id, cacheDir) {
+          var done = this.async();
+
+          var config = pluckConfig(id);
+          // if cacheDir includes a ':', grunt will split it among multiple args
+          cacheDir = Array.prototype.slice.call(arguments, 3).join(':');
+
+
+          util.generateFileHashes(
+              config.changedFiles,
+              cacheDir,
+              taskName,
+              targetName,
+              config.override,
+              function (err) {
+                  if (err) {
+                      throw err;
+                  }
+
+                  // reconfigure task with original config
+                  grunt.config.set([ taskName, targetName ], config.config);
+
+                  done();
+              }
+          );
 
       });
 
