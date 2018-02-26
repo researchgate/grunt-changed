@@ -1,7 +1,7 @@
 {
   "name": "grunt-changed",
   "description": "Run Grunt tasks with only those source files where the content changed to the last run.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "homepage": "https://github.com/researchgate/grunt-changed",
   "author": {
     "name": "Bastian Hofmann",
