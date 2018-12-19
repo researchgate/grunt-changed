@@ -60,7 +60,16 @@ function createTask(grunt) {
      * or array of string source paths.
      */
     var srcFiles = true;
-    if (typeof config.files === 'string') {
+    // if you can't use `src` or `files` variables to check changes
+    if (config.changedSrc) {
+      if (typeof config.changedSrc === 'string') {
+        config.src = [config.changedSrc];
+      } else if (Array.isArray(config.changedSrc) &&
+          typeof config.changedSrc[0] === 'string') {
+        config.src = config.changedSrc;
+      }
+      delete config.changedSrc;
+    } else if (typeof config.files === 'string') {
       config.src = [config.files];
       delete config.files;
       srcFiles = false;
