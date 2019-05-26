@@ -48,7 +48,7 @@
     "files"
   ],
   "dependencies": {
-    "async": "^2.0.0",
+    "async": "^3.0.1",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.5.1"
   }
