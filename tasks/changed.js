@@ -84,7 +84,7 @@ function createTask(grunt) {
             cb);
         },
         generateFileHash: function (fp, cb) {
-          util.generateFileHash(filePath,
+          util.generateFileHash(fp,
             cb);
         }
       };
